@@ -8,5 +8,11 @@ describe 'Airport Challege' do
       plane = Plane.new
       expect { airport.land(plane) }.not_to raise_error
     end
+
+    it 'instruct a plane to take off from an airport' do
+      airport = Airport.new
+      plane = Plane.new
+      expect { airport.take_off(plane) }.not_to raise_error
+    end
   end
 end
