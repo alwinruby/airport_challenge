@@ -1,8 +1,8 @@
 require 'airport'
 require 'plane'
 
-describe 'Airport Challege User Stories' do
-  context 'Airport' do
+describe 'Airport Challege' do
+  context 'User stories' do
     it 'instructs planes to land at an airport' do
       airport = Airport.new
       plane = Plane.new
