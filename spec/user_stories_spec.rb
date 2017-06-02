@@ -2,8 +2,7 @@ require 'airport'
 require 'plane'
 require 'weather'
 
-describe 'Airport Challege' do
-
+describe 'User Stories' do
   let(:airport) { Airport.new(50, weather) }
   let(:plane) { Plane.new }
   let(:weather) { Weather.new }
@@ -14,17 +13,24 @@ describe 'Airport Challege' do
       allow(weather).to receive(:stormy?).and_return false
     end
 
-    it 'instructs planes to land at an airport' do
+    it 'so planes land at airports, instruct a plane to land' do
       expect { airport.land(plane) }.not_to raise_error
     end
 
-    it 'instruct a plane to take off from an airport' do
+    it 'so planes take off from airports, instruct a plane to take off' do
+      airport.land(plane)
       expect { airport.take_off(plane) }.not_to raise_error
     end
 
-    context 'airport full' do
+    it 'takes off planes only from the airport they are at' do
+      airport_2 = Airport.new(50, weather)
+      airport_2.land(plane)
+      expect { airport.take_off(plane) }.to raise_error 'Cannot take off plane: plane not at this airport'
+    end
 
-      it 'will not allow planes to land when airport is full' do
+    context 'when airport is full' do
+
+      it 'does not allow planes to land' do
         50.times do
           airport.land(plane)
         end
@@ -35,7 +41,7 @@ describe 'Airport Challege' do
 
   end
 
-  context 'when stormy' do
+  context 'when weather is stormy' do
 
     before do
       allow(weather).to receive(:stormy?).and_return true
