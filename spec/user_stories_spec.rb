@@ -28,6 +28,12 @@ describe 'User Stories' do
       expect { airport.take_off(plane) }.to raise_error 'Cannot take off plane: plane not at this airport'
     end
 
+    it 'airports have a default capacity' do
+      default_airport = Airport.new(weather)
+      Airport::CAPACITY.times { default_airport.land(plane) }
+      expect { default_airport.land(plane) }.to raise_error 'Cannot land plane: airport at capacity'
+    end
+
     context 'when airport is full' do
 
       it 'does not allow planes to land' do
