@@ -1,3 +1,67 @@
+This is the Airport Challenge - revisited
+
+The test guidelines are below
+
+In order to run the tests on your own machine, fork or clone this repository.
+
+from the terminal or command window first run gem install bundle command.
+
+to see the full tests executed run the command rspec  The folowing tests will be displayed.
+
+    Airport
+      #land
+        when not stormy
+          instructs a plane to land
+          when full
+            raises an error
+        when stormy
+          raises an error
+      #take_off
+        when not stormy
+          instructs a plane to take off
+          confirms a plane that took off
+          raises an error if plane is not at this airport
+        when stormy
+          raises an error
+      #planes
+        returns planes at the airport
+        does not return planes that have taken off
+      defaults
+        has a default capacity
+
+    User Stories
+      when not stormy
+        so planes land at airports, instruct a plane to land
+        so planes take off from airports, instruct a plane to take off
+        takes off planes only from the airport they are at
+        airports have a default capacity
+        flying planes cannot take off
+        flying planes cannot be in an airport
+        non-flying planes cannot land
+        taking off a plane removes it from that airport
+        when airport is full
+          does not allow planes to land
+      when weather is stormy
+        does not allow planes to land
+        does not allow planes to take off
+
+    Plane
+      #take_off
+        should respond to #take_off
+        raises an error if already flying
+      #land
+        stores the airport the plane landed at
+        raises an error if already landed
+      #airport
+        should respond to #airport
+        raises an error if already flying
+
+    Weather
+      #stormy?
+        is not stormy
+        is stormy
+
+
 Airport Challenge
 =================
 
@@ -36,25 +100,25 @@ Task
 We have a request from a client to write the software to control the flow of planes at an airport. The planes can land and take off provided that the weather is sunny. Occasionally it may be stormy, in which case no planes can land or take off.  Here are the user stories that we worked out in collaboration with the client:
 
 ```
-As an air traffic controller 
-So I can get passengers to a destination 
-I want to instruct a plane to land at an airport and confirm that it has landed 
+As an air traffic controller
+So I can get passengers to a destination
+I want to instruct a plane to land at an airport and confirm that it has landed
 
-As an air traffic controller 
-So I can get passengers on the way to their destination 
+As an air traffic controller
+So I can get passengers on the way to their destination
 I want to instruct a plane to take off from an airport and confirm that it is no longer in the airport
 
-As an air traffic controller 
-To ensure safety 
-I want to prevent takeoff when weather is stormy 
+As an air traffic controller
+To ensure safety
+I want to prevent takeoff when weather is stormy
 
-As an air traffic controller 
-To ensure safety 
-I want to prevent landing when weather is stormy 
+As an air traffic controller
+To ensure safety
+I want to prevent landing when weather is stormy
 
-As an air traffic controller 
-To ensure safety 
-I want to prevent landing when the airport is full 
+As an air traffic controller
+To ensure safety
+I want to prevent landing when the airport is full
 
 As the system designer
 So that the software can be used for many different airports
@@ -73,7 +137,7 @@ In code review we'll be hoping to see:
 
 * All tests passing
 * High [Test coverage](https://github.com/makersacademy/course/blob/master/pills/test_coverage.md) (>95% is good)
-* The code is elegant: every class has a clear responsibility, methods are short etc. 
+* The code is elegant: every class has a clear responsibility, methods are short etc.
 
 Reviewers will potentially be using this [code review rubric](docs/review.md).  Referring to this rubric in advance will make the challenge somewhat easier.  You should be the judge of how much challenge you want this weekend.
 

@@ -36,7 +36,9 @@ describe Airport do
   end
 
   describe '#take_off' do
+
     context 'when not stormy' do
+
       before do
         allow(weather).to receive(:stormy?).and_return false
       end
@@ -57,9 +59,11 @@ describe Airport do
         other_airport.land(plane)
         expect { airport.take_off(plane) }.to raise_error 'Cannot take off plane: plane not at this airport'
       end
+
     end
 
     context 'when stormy' do
+
       before do
         allow(weather).to receive(:stormy?).and_return true
       end
@@ -67,10 +71,13 @@ describe Airport do
       it 'raises an error' do
         expect { airport.take_off(plane) }.to raise_error 'Cannot take off plane: stormy weather'
       end
+
     end
+
   end
 
   describe '#planes' do
+
     before do
       allow(weather).to receive(:stormy?).and_return false
     end
@@ -85,9 +92,11 @@ describe Airport do
       airport.take_off(plane)
       expect(airport.planes).not_to include plane
     end
+
   end
 
   context 'defaults' do
+
     subject(:default_airport) { described_class.new(weather) }
 
     it 'has a default capacity' do
@@ -95,5 +104,7 @@ describe Airport do
       described_class::CAPACITY.times { default_airport.land(plane) }
       expect { default_airport.land(plane) }.to raise_error 'Cannot land plane: airport at capacity'
     end
+
   end
+  
 end

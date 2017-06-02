@@ -3,6 +3,7 @@ require 'plane'
 require 'weather'
 
 describe 'User Stories' do
+
   let(:airport) { Airport.new(50, weather) }
   let(:plane) { Plane.new }
   let(:weather) { Weather.new }
@@ -31,8 +32,8 @@ describe 'User Stories' do
     it 'airports have a default capacity' do
       default_airport = Airport.new(weather)
       Airport::CAPACITY.times do
-      the_plane = Plane.new
-      default_airport.land(the_plane)
+        the_plane = Plane.new
+        default_airport.land(the_plane)
       end
       expect { default_airport.land(plane) }.to raise_error 'Cannot land plane: airport at capacity'
     end
