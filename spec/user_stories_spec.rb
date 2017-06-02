@@ -30,27 +30,39 @@ describe 'User Stories' do
 
     it 'airports have a default capacity' do
       default_airport = Airport.new(weather)
-      Airport::CAPACITY.times { default_airport.land(plane) }
+      Airport::CAPACITY.times do
+      the_plane = Plane.new
+      default_airport.land(the_plane)
+      end
       expect { default_airport.land(plane) }.to raise_error 'Cannot land plane: airport at capacity'
     end
 
     it 'flying planes cannot take off' do
-      airport.land(plane)
-      flying_plane = airport.take_off(plane)
-      expect { flying_plane.take_off }.to raise_error 'Plane cannot take off: plane in the air'
+      # airport.land(plane)
+      # flying_plane = airport.take_off(plane)
+      # expect { flying_plane.take_off }.to raise_error 'Plane cannot take off: plane in the air'
+      expect { plane.take_off }.to raise_error 'Plane cannot take off: plane in the air'
     end
 
     it 'flying planes cannot be in an airport' do
+      # airport.land(plane)
+      # flying_plane = airport.take_off(plane)
+      # expect { flying_plane.airport }.to raise_error 'Plane not at Airport: plane in the air'
+      expect { plane.airport }.to raise_error 'Plane not at Airport: plane in the air'
+    end
+
+    it 'non-flying planes cannot land' do
       airport.land(plane)
-      flying_plane = airport.take_off(plane)
-      expect { flying_plane.airport }.to raise_error 'Plane not at Airport: plane in the air'
+      expect { plane.land(airport) }.to raise_error 'Plane cannot land: plane already landed'
     end
 
     context 'when airport is full' do
 
       it 'does not allow planes to land' do
         50.times do
-          airport.land(plane)
+          #airport.land(plane)
+          the_plane = Plane.new
+          airport.land(the_plane)
         end
         expect { airport.land(plane) }.to raise_error 'Cannot land plane: airport at capacity'
       end
