@@ -38,16 +38,10 @@ describe 'User Stories' do
     end
 
     it 'flying planes cannot take off' do
-      # airport.land(plane)
-      # flying_plane = airport.take_off(plane)
-      # expect { flying_plane.take_off }.to raise_error 'Plane cannot take off: plane in the air'
       expect { plane.take_off }.to raise_error 'Plane cannot take off: plane in the air'
     end
 
     it 'flying planes cannot be in an airport' do
-      # airport.land(plane)
-      # flying_plane = airport.take_off(plane)
-      # expect { flying_plane.airport }.to raise_error 'Plane not at Airport: plane in the air'
       expect { plane.airport }.to raise_error 'Plane not at Airport: plane in the air'
     end
 
@@ -56,11 +50,16 @@ describe 'User Stories' do
       expect { plane.land(airport) }.to raise_error 'Plane cannot land: plane already landed'
     end
 
+    it 'taking off a plane removes it from that airport' do
+      airport.land(plane)
+      airport.take_off(plane)
+      expect(airport.planes).not_to include plane
+    end
+
     context 'when airport is full' do
 
       it 'does not allow planes to land' do
         50.times do
-          #airport.land(plane)
           the_plane = Plane.new
           airport.land(the_plane)
         end
