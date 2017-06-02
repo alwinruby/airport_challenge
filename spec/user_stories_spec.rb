@@ -34,6 +34,18 @@ describe 'User Stories' do
       expect { default_airport.land(plane) }.to raise_error 'Cannot land plane: airport at capacity'
     end
 
+    it 'flying planes cannot take off' do
+      airport.land(plane)
+      flying_plane = airport.take_off(plane)
+      expect { flying_plane.take_off }.to raise_error 'Plane cannot take off: plane in the air'
+    end
+
+    it 'flying planes cannot be in an airport' do
+      airport.land(plane)
+      flying_plane = airport.take_off(plane)
+      expect { flying_plane.airport }.to raise_error 'Plane not at Airport: plane in the air'
+    end
+
     context 'when airport is full' do
 
       it 'does not allow planes to land' do
